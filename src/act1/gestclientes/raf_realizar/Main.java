@@ -27,22 +27,14 @@ public class Main {
 		File f1 = new File("clientes2.dat");
 		File f2 = new File("Clientes_compactados.dat");
 		RandomAccessFile raf = new RandomAccessFile(f, "rw");
-
-		Resultado=Resultado + "compactar_con_fichero_auxiliar" + "\n";
-		Resultado=Resultado + Leer(f) + "\n";
+		
+		Resultado= Resultado + "compactar_con_fichero_auxiliar" + "\n" + Leer(f) + "\n";		
 		compactar_con_fichero_auxiliar(f);
-		Resultado=Resultado + "Clientes compactados" + "\n";
-		Resultado=Resultado + Leer(f2) + "\n";
-		Resultado=Resultado + Leer(f) + "\n";
-		
-		f2.delete();
-		
-		Resultado=Resultado + "compactar_sobre_mismo_fichero" + "\n";
-		Resultado=Resultado + Leer(f1) + "\n";
-		
+		Resultado= Resultado + Leer(f2) + "\n" + Leer(f) + "\n";		
+		f2.delete();		
+		Resultado= Resultado + "compactar_sobre_mismo_fichero" + "\n" + Leer(f1) + "\n";			
 		compactar_sobre_mismo_fichero(f1);
-		
-		Resultado=Resultado + Leer(f1);
+		Resultado= Resultado + Leer(f1);
 		
 		System.out.println(Resultado);
 
@@ -84,12 +76,10 @@ public class Main {
 			while ((contador < (fichero_aleatorio_lectura.length() / c.KTAM))) {
 
 				Cliente Objeto_cliente = new Cliente();
-
 				Objeto_cliente.leerDeFichero(fichero_aleatorio_lectura);
-
 				Objeto_cliente.escribirEnFichero(fichero_aleatorio_escritura);
-
 				contador++;
+				
 			}
 
 			fichero_aleatorio_escritura.setLength(c.KTAM * contador);
@@ -128,7 +118,6 @@ public class Main {
 			System.err.println();
 		}
 		catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		truncar(f,contador2);
@@ -139,9 +128,10 @@ public class Main {
 		Cliente c = new Cliente();
 		int contador = 0;
 		String lectura = "";
-	
-		lectura=lectura + "Archivo: " + f.getName() + " con tamanyo " + f.length() + " bytes." + "\n";
-		lectura=lectura + "----------------------------------" + "\n";
+		
+		lectura = lectura + "----------------------------------" + "\n";
+		lectura = lectura + "Archivo: " + f.getName() + " con tamanyo " + f.length() + " bytes." + "\n";
+		lectura = lectura + "----------------------------------" + "\n";
 
 		try (RandomAccessFile fichero_aleatorio_lectura = new RandomAccessFile(f, "r");) {
 			contador = 1;
@@ -151,13 +141,13 @@ public class Main {
 				Cliente Objeto_cliente = new Cliente();
 
 				Objeto_cliente.leerDeFichero(fichero_aleatorio_lectura);
+				
 				lectura = lectura + Objeto_cliente.getId() + " " + Objeto_cliente.getNombre() + " "
 						+ Objeto_cliente.getApellidos() + " " + Objeto_cliente.getSaldo() + "\n";
 
 				contador++;
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return lectura;
@@ -167,9 +157,8 @@ public class Main {
 		
 		try (RandomAccessFile fichero_aleatorio_escritura = new RandomAccessFile(f, "rw");) {
 			Cliente c = new Cliente();
-			fichero_aleatorio_escritura.setLength(c.KTAM*hasta);
+			fichero_aleatorio_escritura.setLength(c.KTAM * hasta);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
